@@ -2,11 +2,15 @@ import React from "react"
 
 class PizzaForm extends React.Component {
 
-  state = {
-    id: null,
-    topping: "",
-    size: "",
-    vegetarian: false
+  constructor(){
+    super();
+    this.state = {
+      id: null,
+      topping: "",
+      size: "",
+      vegetarian: false
+    };
+    this.myRef = React.createRef();
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -17,6 +21,7 @@ class PizzaForm extends React.Component {
         size: this.props.size,
         vegetarian: this.props.vegetarian
       });
+      this.myRef.current.focus();
     }
   }
 
@@ -52,10 +57,12 @@ class PizzaForm extends React.Component {
     return(
       <div className="form-row">
         <div className="col-5">
-            <input type="text" className="form-control" name="topping" placeholder="Pizza Topping" value={
+            <input type="text" className="form-control" name="topping" placeholder="Pizza Topping" 
+              value={
                 //Pizza Topping Should Go Here
                 this.state.topping
               }
+              ref={this.myRef}
               onChange={this.onInputChange}
               />
         </div>
